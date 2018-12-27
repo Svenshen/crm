@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" lang="zh-CN">
+<head th:replace="common::commonHeader('主页')">
+</head>
+<body>
+    <div th:include="common::commonNav"></div>
+    <div class="container">
+        <h2 class="form-horizontal-heading text-center">营销员查询</h2>
+        <table class="table table-striped table-hover " >
+            <thead>
+                <tr>
+                    <th>用户名</th>
+                    <th>名字</th>
+                    <th>部门</th>
+                    <th>权限</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="users :${listuser}">
+                    <td th:text="${users.username}"></td>
+                    <td th:text="${users.name}"></td>
+                    <td th:text="${users.bumen}"></td>
+                    <td th:text="${users.quanxian}"></td>
+                    <td><a th:href="@{update/{username}(username=${users.username})}">修改</a></td>
+                </tr>
+                
+            </tbody>
+        </table>
+    </div>
+    <div th:include="common::commonFooter"></div>
+</body>
+</html>
