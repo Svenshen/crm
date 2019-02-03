@@ -38,7 +38,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @ResponseBody
 @RequestMapping("/user")
-public class UserController {
+public class UserController extends CommonController{
     
     @Autowired
     UserService userService;
@@ -56,7 +56,7 @@ public class UserController {
     public ModelAndView changePassowrd(ModelAndView modelAndView,@RequestParam("password1") String password1,@RequestParam("password2") String password2){
         Subject subject = SecurityUtils.getSubject();
         User user = (User)subject.getPrincipal();
-        modelAndView.addObject("user",user);
+        Common(modelAndView);
         System.out.println("changepassword:"+password1+","+password2);
            
         if(password1.equals(password2)){
@@ -78,9 +78,7 @@ public class UserController {
     
     @GetMapping(value = "/changepassword")
     public ModelAndView changePassowrd(ModelAndView modelAndView){
-        Subject subject = SecurityUtils.getSubject();
-        User user = (User)subject.getPrincipal();
-        modelAndView.addObject("user",user);
+        Common(modelAndView);
         modelAndView.setViewName(changepasswordhtml);
         return modelAndView;
     }  
@@ -88,9 +86,7 @@ public class UserController {
     @GetMapping(value = "/add")
     @RequiresRoles(value={"40","99"}, logical= Logical.OR)
     public ModelAndView add(ModelAndView modelAndView){
-        Subject subject = SecurityUtils.getSubject();
-        User user = (User)subject.getPrincipal();
-        modelAndView.addObject("user",user);
+        Common(modelAndView);
         List<Quanxian> listquanxian = quanxianService.findAll();
         List<Bumen> listbumen = bumenService.findAll();
         modelAndView.addObject("listquanxian",listquanxian);
@@ -102,9 +98,7 @@ public class UserController {
     @PostMapping(value = "/add")
     @RequiresRoles(value={"40","99"}, logical= Logical.OR)
     public ModelAndView add(ModelAndView modelAndView,User userinfo){
-        Subject subject = SecurityUtils.getSubject();
-        User user = (User)subject.getPrincipal();
-        modelAndView.addObject("user",user);
+        Common(modelAndView);
         List<Quanxian> listquanxian = quanxianService.findAll();
         List<Bumen> listbumen = bumenService.findAll();
         modelAndView.addObject("listquanxian",listquanxian);
@@ -127,9 +121,7 @@ public class UserController {
     @GetMapping(value = "/query")
     @RequiresRoles(value={"40","99"}, logical= Logical.OR)
     public ModelAndView query(ModelAndView modelAndView){
-        Subject subject = SecurityUtils.getSubject();
-        User user = (User)subject.getPrincipal();
-        modelAndView.addObject("user",user);
+        Common(modelAndView);
            
         modelAndView.setViewName(queryhtml);
         return modelAndView;
@@ -153,9 +145,7 @@ public class UserController {
     @GetMapping(value = "/update/{username}")
     @RequiresRoles(value={"40","99"}, logical= Logical.OR)
     public ModelAndView update(ModelAndView modelAndView,@PathVariable("username")  String username){
-        Subject subject = SecurityUtils.getSubject();
-        User user = (User)subject.getPrincipal();
-        modelAndView.addObject("user",user);
+        Common(modelAndView);
         User updateuser = userService.findByUsername(username);
         modelAndView.addObject("userinfo",updateuser);
         List<Quanxian> listquanxian = quanxianService.findAll();
@@ -169,9 +159,7 @@ public class UserController {
     @PostMapping(value = "/update/{username}")
     @RequiresRoles(value={"40","99"}, logical= Logical.OR)
     public ModelAndView update(ModelAndView modelAndView,User userinfo){
-        Subject subject = SecurityUtils.getSubject();
-        User user = (User)subject.getPrincipal();
-        modelAndView.addObject("user",user);
+        Common(modelAndView);
         System.out.println(userinfo);
         try{
             userService.updateUser(userinfo);
@@ -194,9 +182,7 @@ public class UserController {
     @GetMapping(value = "/delete/{username}")
     @RequiresRoles(value={"40","99"}, logical= Logical.OR)
     public ModelAndView delete(ModelAndView modelAndView,@PathVariable("username")  String username){
-        Subject subject = SecurityUtils.getSubject();
-        User user = (User)subject.getPrincipal();
-        modelAndView.addObject("user",user);
+        Common(modelAndView);
         try{
             userService.delUser(username);
             modelAndView.addObject("msg","删除成功");

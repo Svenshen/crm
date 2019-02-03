@@ -34,15 +34,14 @@ import org.springframework.web.servlet.ModelAndView;
  * @date 2018-9-6 14:20:03
  */
 @Controller
-public class LoginController {
+public class LoginController extends CommonController{
 
     
     
     @RequestMapping(value = {"/index","/"})
     
     public ModelAndView index(ModelAndView modelAndView){
-        Subject subject = SecurityUtils.getSubject();
-        modelAndView.addObject("user",((User)subject.getPrincipal()));
+        Common(modelAndView);
         modelAndView.setViewName("index");
         return modelAndView;
     }

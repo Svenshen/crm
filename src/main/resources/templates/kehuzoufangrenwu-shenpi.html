@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" lang="zh-CN">
+<head th:replace="common::commonHeader('主页')">
+</head>
+<body>
+    <div th:include="common::commonNav"></div>
+    <div class="container">
+        <form class="form-signin" th:action="@{/kehuzoufangrenwu/shenhe/${id}}" method="post">
+            <div class="row">
+                <div class="form-group col-xs-12 col-md-12">
+                        <h2 class="form-horizontal-heading text-center">走访申请审批</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-xs-12 col-md-12">
+                    <span  style="font-size: 12px;color: red" th:text="${msg}" aria-describedby="basic-addon0"></span>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-xs-12 col-md-6">
+                    <label for="inputPassword3" class="col-xs-4 col-md-4 control-label">客户名称：</label>
+                    <div class="col-xs-8 col-md-8">
+                      <input type="text" class="form-control"  name="kehumingcheng" th:value=" ${kehuinfo!=null}?${kehuinfo.kehumingcheng}" readonly>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-xs-12 col-md-6">
+                    <label for="inputPassword3" class="col-xs-4 col-md-4 control-label">联系人：</label>
+                    <div class="col-xs-8 col-md-8">
+                      <input type="text" class="form-control"  name="lianxiren" th:value=" ${kehuinfo!=null}?${kehuinfo.lianxiren}" readonly>
+                    </div>
+                </div>
+                <div class="form-group col-xs-12 col-md-6">
+                    <label for="inputPassword3" class="col-xs-4 col-md-4 control-label">联系电话：</label>
+                    <div class="col-xs-8 col-md-8">
+                      <input type="text" class="form-control"  name="lianxidianhua" th:value=" ${kehuinfo!=null}?${kehuinfo.lianxidianhua}" readonly> 
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-xs-12 col-md-12">
+                    <label for="inputPassword3" class="col-xs-4 col-md-2  control-label">地址：</label>
+                    <div class="col-xs-8 col-md-10 ">
+                      <input type="text" class="form-control"  name="dizhi" th:value=" ${kehuinfo!=null}?${kehuinfo.dizhi}" readonly>
+                    </div>
+                </div>
+            </div>
+                       
+            <div class="row">
+                <div class="form-group col-xs-12 col-md-6">
+                    <label for="inputPassword3" class="col-xs-4 col-md-4 control-label">是否有寄递需求：</label>
+                    <div class="col-xs-8 col-md-8">
+                        <select class="form-control" name="shifouyoujidixuqiu" readonly>
+                            <option  th:each="shifouyoujidixuqiu : ${listshifouyoujidixuqiu}" th:text="${shifouyoujidixuqiu}" th:value="${shifouyoujidixuqiu}" th:selected=" ${kehuinfo!=null}?${kehuinfo.shifouyoujidixuqiu} == ${shifouyoujidixuqiu}"></option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-xs-12 col-md-6">
+                    <label for="inputPassword3" class="col-xs-4 col-md-4 control-label">国内业务量：</label>
+                    <div class="col-xs-8 col-md-8">
+                        <select class="form-control" name="guoneiyewuliang" readonly>
+                            <option  th:each="guoneiyewuliang : ${listguoneiyewuliang}" th:text="${guoneiyewuliang}" th:value="${guoneiyewuliang}" th:selected=" ${kehuinfo!=null}?${kehuinfo.guoneiyewuliang} == ${guoneiyewuliang}"></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group col-xs-12 col-md-6">
+                    <label for="inputPassword3" class="col-xs-4 col-md-4 control-label">国内业务收入：</label>
+                    <div class="col-xs-8  col-md-8">
+                        <select class="form-control" name="guoneiyewushouru" readonly>
+                            <option  th:each="guoneiyewushouru : ${listguoneiyewushouru}" th:text="${guoneiyewushouru}" th:value="${guoneiyewushouru}" th:selected=" ${kehuinfo!=null}?${kehuinfo.guoneiyewushouru} == ${guoneiyewushouru}"></option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="form-group col-xs-12 col-md-6">
+                    <label for="inputPassword3" class="col-xs-4 col-md-4 control-label">国际业务量：</label>
+                    <div class="col-xs-8 col-md-8">
+                        <select class="form-control" name="guojiyewuliang" readonly>
+                            <option  th:each="guojiyewuliang : ${listguojiyewuliang}" th:text="${guojiyewuliang}" th:value="${guojiyewuliang} " th:selected=" ${kehuinfo!=null}?${kehuinfo.guojiyewuliang} == ${guojiyewuliang}"></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group col-xs-12 col-md-6">
+                    <label for="inputPassword3" class="col-xs-4 col-md-4 control-label">国际业务收入：</label>
+                    <div class="col-xs-8 col-md-8">
+                        <select class="form-control" name="guojiyewushouru" readonly>
+                            <option  th:each="guojiyewushouru : ${listguojiyewushouru}" th:text="${guojiyewushouru}" th:value="${guojiyewushouru}" th:selected=" ${kehuinfo!=null}?${kehuinfo.guojiyewushouru} == ${guojiyewushouru}"></option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="form-group col-xs-12 col-md-6">
+                    <label for="inputPassword3" class="col-xs-4 col-md-4 control-label">目前使用快递公司：</label>
+                    <div class="col-xs-8 col-md-8">
+                        <select multiple class="form-control" name="muqianshiyongkuaidigongsi" readonly>
+                            <option  th:each="muqianshiyongkuaidigongsi : ${listmuqianshiyongkuaidigongsi}" th:text="${muqianshiyongkuaidigongsi}" th:value="${muqianshiyongkuaidigongsi}" th:selected=" ${kehuinfo!=null}?${kehuinfo.muqianshiyongkuaidigongsi} == ${muqianshiyongkuaidigongsi}"></option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-xs-12 col-md-12">
+                    <label for="inputPassword3" class="col-xs-4 col-md-2 control-label">备注：</label>
+                    <div class="col-xs-8 col-md-10">
+                      <input type="text" class="form-control"  name="beizhu" th:value=" ${kehuinfo!=null}?${kehuinfo.beizhu}" readonly>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="form-group col-xs-12 col-md-12">
+                    <label for="inputPassword3" class="col-xs-4 col-md-2 control-label">走访任务接收人：</label>
+                    <div class="col-xs-8 col-md-8">
+                        <select multiple class="form-control" name="zoufangrenwujieshouren" readonly>
+                            <option th:each="user : ${listuser}" th:text="${user.name}" th:value="${user.username}"></option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-xs-12 col-md-2">
+                  <div class=" col-xs-12 col-md-offset-1">
+                    <button type="submit" class="btn btn-primary  btn-block">确认修改</button>
+                  </div>
+                </div>
+                <div class="form-group col-xs-12 col-md-2">
+                  <div class=" col-xs-12 col-md-offset-2">
+                      <a th:href="@{/kehuzoufangrenwu/reject/${id}}" class="btn btn-danger btn-block">拒绝</a>
+                  </div>
+                </div>
+            </div>
+    </form>
+        </div>
+    <div th:include="common::commonFooter"></div>
+</body>
+</html>

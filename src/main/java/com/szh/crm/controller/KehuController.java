@@ -34,7 +34,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @ResponseBody
 @RequestMapping("/kehu")
-public class KehuController {
+public class KehuController extends CommonController{
 
     final String addhtml = "kehu-add";
     final String querylisthtml  = "kehu-querylist";
@@ -58,9 +58,7 @@ public class KehuController {
     //
     @GetMapping(value = "/add")
     public ModelAndView add(ModelAndView modelAndView){
-        Subject subject = SecurityUtils.getSubject();
-        User user = (User)subject.getPrincipal();
-        modelAndView.addObject("user",user);
+        Common(modelAndView);
         modelAndView.addObject("listshifouyoujidixuqiu",listshifouyoujidixuqiu);
         modelAndView.addObject("listguoneiyewuliang",listguoneiyewuliang);
         modelAndView.addObject("listguoneiyewushouru",listguoneiyewushouru);
@@ -76,7 +74,7 @@ public class KehuController {
     public ModelAndView add(ModelAndView modelAndView,Kehu kehu){
         Subject subject = SecurityUtils.getSubject();
         User user = (User)subject.getPrincipal();
-        modelAndView.addObject("user",user);
+        Common(modelAndView);
         modelAndView.addObject("listshifouyoujidixuqiu",listshifouyoujidixuqiu);
         modelAndView.addObject("listguoneiyewuliang",listguoneiyewuliang);
         modelAndView.addObject("listguoneiyewushouru",listguoneiyewushouru);
@@ -100,9 +98,7 @@ public class KehuController {
     
     @GetMapping(value = "/querylist")
     public ModelAndView query(ModelAndView modelAndView){
-        Subject subject = SecurityUtils.getSubject();
-        User user = (User)subject.getPrincipal();
-        modelAndView.addObject("user",user);
+        Common(modelAndView);
 //        List<Kehu> listkehu = null;
 //        if(user.getQuanxian().equals("40") ||user.getQuanxian().equals("30")){
 //            listkehu= kehuService.findAll();
@@ -147,7 +143,7 @@ public class KehuController {
     public ModelAndView update(ModelAndView modelAndView,@PathVariable("kehumingcheng")  String kehumingcheng){
         Subject subject = SecurityUtils.getSubject();
         User user = (User)subject.getPrincipal();
-        modelAndView.addObject("user",user);
+        Common(modelAndView);
         try{
             Kehu kehu = kehuService.findByKehumingcheng(kehumingcheng);
             if(user.getQuanxian().equals("40") ||user.getQuanxian().equals("30")){
@@ -184,7 +180,7 @@ public class KehuController {
     public ModelAndView update(ModelAndView modelAndView,Kehu kehu){
         Subject subject = SecurityUtils.getSubject();
         User user = (User)subject.getPrincipal();
-        modelAndView.addObject("user",user);
+        Common(modelAndView);
         try{
             Kehu kehuinfo =  kehuService.findByKehumingcheng(kehu.getKehumingcheng());
             if(kehuinfo == null){
@@ -234,7 +230,7 @@ public class KehuController {
     public ModelAndView delete(ModelAndView modelAndView,@PathVariable("kehumingcheng")  String kehumingcheng){
         Subject subject = SecurityUtils.getSubject();
         User user = (User)subject.getPrincipal();
-        modelAndView.addObject("user",user);
+        Common(modelAndView);
         try{
             Kehu kehuinfo =  kehuService.findByKehumingcheng(kehumingcheng);
             if(kehuinfo == null){

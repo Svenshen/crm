@@ -5,18 +5,40 @@
 
 <body>
     <div th:include="common::commonNav"></div>
-    
-        <div class="container-fluid">
-            <h2 class="form-horizontal-heading text-center">客户查询</h2>
-<!--            <div class="panel-body" style="padding-bottom:0px;">
-            <div class="panel panel-default">-->
-<!--                <div class="row">
-                    <div class="form-group col-xs-12 col-md-12">
-                        <span  style="font-size: 12px;color: red" th:text="${msg}" aria-describedby="basic-addon0"></span>
+    <div class="modal fade" id="paifamodel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        
+            <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                        &times;
+                                </button>
+                                <h4 class="modal-title" id="myModalLabel">
+                                        派发任务
+                                </h4>
+                        </div>
+                        <form class="form-signin" th:action="@{/kehuzoufangrenwu/paifa}" method="post">
+                            <div class="modal-body" >
+                                <input id="paifamodelTextid" type="hidden" class="form-control"  name="id" readonly >
+                                <select class="form-control" name="jieshourenusername">
+                                    <option  th:each="userx : ${users}" th:text="${userx.name}" th:value="${userx.username}" ></option>
+                                </select>
+                            </div>
+                            <div class="modal-footer">
+                                    <button type="submit" class="btn btn-primary  btn-block" >派发
+                                    </button>
 
-                    </div>
-                </div>-->
-<!--                <div class="panel-heading">查询条件</div>
+                            </div>
+                        </form>    
+                    </div><!-- /.modal-content -->
+            </div><!-- /.modal -->
+        
+    </div>
+        <div class="container-fluid">
+            <h2 class="form-horizontal-heading text-center">走访申请审批</h2>
+<!--            <div class="panel-body" style="padding-bottom:0px;">
+            <div class="panel panel-default">
+                <div class="panel-heading">查询条件</div>
                 <div class="panel-body">
                     <form id="formSearch" class="form-horizontal">
                         <div class="form-group" style="margin-top:15px">
@@ -33,28 +55,25 @@
                             </div>
                         </div>
                     </form>
-                </div>-->
-            </div>      
+                </div>
+            </div>       -->
 
             <div id="toolbar" class="btn-group">
-                <button id="btn_add" type="button" class="btn btn-default">
+<!--                <button id="btn_add" type="button" class="btn btn-default">
                     <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
-                </button>
-                <button id="btn_edit" type="button" class="btn btn-default">
-                    <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>修改
-                </button>
-                <button id="btn_newzf" type="button" class="btn btn-default">
-                    <span class="glyphicon glyphicon-glass" aria-hidden="true"></span>走访
-                </button>
-                <button id="btn_zflog" type="button" class="btn btn-default">
-                    <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>查看走访
-                </button>
-                <button id="btn_sqzf" type="button" class="btn btn-default">
-                    <span class="glyphicon glyphicon-cloud-upload" aria-hidden="true"></span>申请协助
-                </button>
-<!--                <button id="btn_delete" type="button" class="btn btn-default">
-                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
                 </button>-->
+                <button id="btn_edit" type="button" class="btn btn-default">
+                    <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>派发
+                </button>
+<!--                <button id="btn_newzf" type="button" class="btn btn-default">
+                    <span class="glyphicon glyphicon-glass" aria-hidden="true"></span>走访
+                </button>-->
+<!--                <button id="btn_zflog" type="button" class="btn btn-default">
+                    <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>查看走访
+                </button>-->
+                <button id="btn_delete" type="button" class="btn btn-default">
+                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>拒绝
+                </button>
             </div>
             <table id="mytb"></table>
         </div>
@@ -72,13 +91,13 @@
 
         });
 
-
+       
         var TableInit = function () {
             var oTableInit = new Object();
             //初始化Table
             oTableInit.Init = function () {
                 $('#mytb').bootstrapTable({
-                    url: '/crm/kehu/querylistrest',         //请求后台的URL（*）
+                    url: '/crm/kehuzoufangrenwu/shenqingshenpilistrest',         //请求后台的URL（*）
                     method: 'get',                      //请求方式（*）
                     toolbar: '#toolbar',                //工具按钮用哪个容器
                     striped: true,                      //是否显示行间隔色
@@ -108,65 +127,34 @@
                     //是否显示父子表
                     columns: [{
                         checkbox: true
-                    }, {
+                    },
+                    {
+                        field: 'id',
+                        title: '序号',
+                        visible: false
+                    },
+                        {
                         field: 'kehumingcheng',
                         title: '客户名称'
                     }, {
-                        field: 'dizhi',
-                        title: '地址',
-                        visible: false
+                        field: 'faqiren',
+                        title: '发起人'
                     }, {
-                        field: 'lianxiren',
-                        title: '联系人',
-                        visible: false
+                        field: 'faqibumen',
+                        title: '发起部门'
                     }, {
-                        field: 'lianxidianhua',
-                        title: '联系电话',
-                        visible: false
+                        field: 'renwujieshouren',
+                        title: '任务接受人'
                     }, 
                     {
-                        field: 'shifouyoujidixuqiu',
-                        title: '是否有寄递需求'
+                        field: 'zhuangtai',
+                        title: '状态'
                         },
                     {
-                            field: 'guoneiyewuliang',
-                            title: '国内业务量'
+                        field: 'shenqingshijian',
+                        title: '申请时间'
                         },
-                    {
-                            field: 'guoneiyewushouru',
-                            title: '国内业务收入'
-                        },
-                    {
-                            field: 'guojiyewuliang',
-                            title: '国际业务量'
-                        },
-                    {
-                            field: 'guojiyewushouru',
-                            title: '国际业务收入'
-                        },
-                    {
-                            field: 'muqianshiyongkuaidigongsi',
-                            title: '目前使用快递公司'
-                        },
-                        {
-                            field: 'beizhu',
-                            title: '备注',
-                            visible: false
-                        },
-                        {
-                            field: 'zoufangjieguo',
-                            title: '走访结果',
-                        },
-                    {
-                            field: 'chuangjianren',
-                            title: '创建人'
-                        },{
-                            field: 'zhandian',
-                            title: '部门'
-                        },{
-                            field: 'dengjishijian',
-                            title: '创建时间'
-                        },]
+                    ]
                 });
             };
 
@@ -183,17 +171,13 @@
             };
             return oTableInit;
         };
-
-
+        
         var ButtonInit = function () {
             var oInit = new Object();
             var postdata = {};
 
             oInit.Init = function () {
                 //初始化页面上面的按钮事件
-                $("#btn_add").click(function () {
-                   window.location.href="add";
-                });
                 
                 $("#btn_edit").click(function () {
                     var arrselections = $("#mytb").bootstrapTable('getSelections');
@@ -207,15 +191,12 @@
                        $('#tishiModal').modal();
                        return;
                    }
-                   window.location.href="update/"+arrselections[0].kehumingcheng;
-                    
-                    
+                   //paifamodelTextid
+                   $("#paifamodelTextid").val(arrselections[0].id);
+                   $('#paifamodel').modal();
                 });
-                //btn_newzf
-                $("#btn_newzf").click(function () {
-                    /*<![CDATA[*/
-                    var url = /*[[@{/kehuzoufang/add}]]*/'';
-                    /*]]>*/
+                
+                $("#btn_delete").click(function () {
                     var arrselections = $("#mytb").bootstrapTable('getSelections');
                     if (arrselections.length > 1) {
                         $("#tishiModalText").text("只能选择一行进行编辑");
@@ -227,48 +208,16 @@
                        $('#tishiModal').modal();
                        return;
                    }
-                   window.location.href=url+"/"+arrselections[0].kehumingcheng;
+                   window.location.href="reject/"+arrselections[0].id;
+                    
                 });
-                //btn_zflog
-            $("#btn_zflog").click(function () {
-                /*<![CDATA[*/
-                    var url = /*[[@{/kehuzoufang/query}]]*/'';
-                /*]]>*/
-                var arrselections = $("#mytb").bootstrapTable('getSelections');
-                    if (arrselections.length > 1) {
-                        $("#tishiModalText").text("只能选择一行进行编辑");
-                        $('#tishiModal').modal();
-                        return;
-                    }
-                    if (arrselections.length <= 0) {
-                       $("#tishiModalText").text("请选择有效数据");
-                       $('#tishiModal').modal();
-                       return;
-                   }
-                   window.location.href=url+"/"+arrselections[0].kehumingcheng;
-                });
-                //btn_sqzf
-                $("#btn_sqzf").click(function () {
-                /*<![CDATA[*/
-                    var url = /*[[@{/kehuzoufangrenwu/add}]]*/'';
-                /*]]>*/
-                var arrselections = $("#mytb").bootstrapTable('getSelections');
-                    if (arrselections.length > 1) {
-                        $("#tishiModalText").text("只能选择一行进行编辑");
-                        $('#tishiModal').modal();
-                        return;
-                    }
-                    if (arrselections.length <= 0) {
-                       $("#tishiModalText").text("请选择有效数据");
-                       $('#tishiModal').modal();
-                       return;
-                   }
-                   window.location.href=url+"/"+arrselections[0].kehumingcheng;
-                });
-            };
-            
+                
+                
+            };    
             return oInit;
         };
+
+
     </script>
 </body>
 </html>

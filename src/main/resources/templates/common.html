@@ -67,6 +67,16 @@
                                                 <li><a th:href="@{/kehu/querylist}">客户查询</a></li>
                                         </ul>
                         </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                            走访管理<b class="caret"></b><span class="badge" th:text="${renwunum}">0</span> 
+                                    </a>
+                                        <ul class="dropdown-menu">
+                                                <li><a th:href="@{/kehuzoufang/querylist}">走访记录查询</a></li>
+                                                <li><a th:href="@{/kehuzoufangrenwu/querylist}">走访申请查询</a></li>
+                                                <li><a th:href="@{/kehuzoufangrenwu/renwu}">走访任务查询<span class="badge pull-right" th:text="${renwunum}">0</span></a></li>
+                                        </ul>
+                        </li>
 
                     </ul>
                     <ul class="nav navbar-nav" th:case="20" >
@@ -79,6 +89,16 @@
                                                 <li><a th:href="@{/kehu/querylist}">客户查询</a></li>
                                         </ul>
                         </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                            走访管理 <b class="caret"></b><span class="badge" th:text="${renwunum}">0</span>
+                                    </a>
+                                        <ul class="dropdown-menu">
+                                                <li><a th:href="@{/kehuzoufang/querylist}">走访记录查询</a></li>
+                                                <li><a th:href="@{/kehuzoufangrenwu/querylist}">走访申请查询</a></li>
+                                                <li><a th:href="@{/kehuzoufangrenwu/renwu}">走访任务查询<span class="badge pull-right" th:text="${renwunum}">0</span></a></li>
+                                        </ul>
+                        </li>
                     </ul>
                     <ul class="nav navbar-nav" th:case="30" >
                         <li class="dropdown">
@@ -88,6 +108,16 @@
                                         <ul class="dropdown-menu">
                                                 <li><a th:href="@{/kehu/add}">新建客户</a></li>
                                                 <li><a th:href="@{/kehu/querylist}">客户查询</a></li>
+                                        </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                            走访管理 <b class="caret"></b><span class="badge " th:text="${renwunum}">0</span>
+                                    </a>
+                                        <ul class="dropdown-menu">
+                                                <li><a th:href="@{/kehuzoufang/querylist}">走访记录查询</a></li>
+                                                <li><a th:href="@{/kehuzoufangrenwu/querylist}">走访申请查询</a></li>
+                                                <li><a th:href="@{/kehuzoufangrenwu/renwu}">走访任务查询 <span class="badge pull-right" th:text="${renwunum}">0</span></a></li>
                                         </ul>
                         </li>
                     </ul>
@@ -103,6 +133,17 @@
                         </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                            走访管理 <b class="caret"></b><span class="badge" th:text="${renwunum}">0</span>
+                                    </a>
+                                        <ul class="dropdown-menu">
+                                                <li><a th:href="@{/kehuzoufang/querylist}">走访记录查询</a></li>
+                                                <li><a th:href="@{/kehuzoufangrenwu/shenqingshenpilist}">走访申请审批</a></li>
+                                                <li><a th:href="@{/kehuzoufangrenwu/querylist}">走访申请查询</a></li>
+                                                <li><a th:href="@{/kehuzoufangrenwu/renwu}">走访任务查询<span class="badge pull-right" th:text="${renwunum}">0</span></a></li>
+                                        </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                             营销员管理 <b class="caret"></b>
                                     </a>
                                         <ul class="dropdown-menu">
@@ -111,6 +152,8 @@
 <!--                                                <li><a th:href="@{/user/huifu}">营销员恢复</a></li>-->
                                         </ul>
                         </li>
+                        
+                        
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li><a class="glyphicon glyphicon-user disabled" th:text="${user.name}" href="####"></a></li>

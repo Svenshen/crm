@@ -25,4 +25,7 @@ public interface UserDao extends  JpaRepository<User,String>{
     public User findByUsernameAndIsdel(String username,boolean isdel);
     
     public List<User> findByIsdel(boolean isdel);
+    
+    public User findByUsername(String username);
+    
 }

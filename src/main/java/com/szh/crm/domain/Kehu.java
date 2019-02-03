@@ -53,6 +53,8 @@ public class Kehu implements Serializable{
     @Column
     String beizhu;
     @Column
+    String zoufangjieguo;
+    @Column
     String chuangjianren;
     @Column
     boolean isdel = false;
