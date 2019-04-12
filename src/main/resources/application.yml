@@ -1,13 +1,19 @@
 ## YAML Template.
 ---
+server:
+    servlet:
+        context-path: /
+        port: 8080
+        uri-encoding: utf8
+        
 spring:
     jmx:
         default-domain: crm
     # jdbc_config   datasource
     datasource:
-        url: jdbc:mysql://localhost:3306/crm?useSSL=false
+        url: jdbc:mysql://db:3306/crm?useSSL=false&serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf8
         username: root
-        password: Ems2017
+        password: 63559627
         driver-class-name: com.mysql.jdbc.Driver
         # Hikari will use the above plus the following to setup connection pooling
         #type: com.zaxxer.hikari.HikariDataSource
@@ -65,6 +71,7 @@ spring:
 #        connection-test-query: SELECT 1
         #jpa config
     jpa:
+        database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
         hibernate:
             #可选参数 
             #create 启动时删数据库中的表，然后创建，退出时不删除数据表 
@@ -72,9 +79,9 @@ spring:
             #update 如果启动时表格式不一致则更新表，原有数据保留 
             #validate 项目启动表结构进行校验 如果不一致则报错
             #none 则不进行任何操作
-            ddl-auto: update        
+            ddl-auto: update
         show-sql: true
-    #让控制器输出的json格式更美观
+    #让控制器输出的json格式更美观hibernate.dialect
     jackson:
         serialization:
             indent-output: true

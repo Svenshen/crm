@@ -301,7 +301,7 @@ public class KehuzoufangrenwuController extends CommonController{
         return modelAndView;
     }
     //kehuzoufangrenwuqueryzoufang
-    @GetMapping(value = "/renwuzoufangqueryrest/{id}")
+    @GetMapping(value = {"/renwuzoufangqueryrest/{id}","/zoufanglog/rest/{id}"})
     public List renwuzoufangqueryrest(@PathVariable("id")  Long id){
         Long zoufangid = kehuzoufangrenwuService.findById(id).getZoufangid();
         List<Kehuzoufang> list = new ArrayList<>();

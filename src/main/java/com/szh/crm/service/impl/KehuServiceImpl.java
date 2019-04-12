@@ -8,11 +8,16 @@
 package com.szh.crm.service.impl;
 
 import com.szh.crm.dao.KehuDao;
+import com.szh.crm.dao.KehuzoufangDao;
 import com.szh.crm.domain.Kehu;
+import com.szh.crm.domain.Kehuzoufang;
 import com.szh.crm.service.KehuService;
+import com.szh.crm.service.KehuzoufangService;
+import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
@@ -25,7 +30,8 @@ public class KehuServiceImpl implements KehuService{
 
     @Autowired
     KehuDao kehuDao;
-    
+    @Autowired
+    KehuzoufangService kehuzoufangService;
     
     @Override
     public List<Kehu> findAll() {
@@ -69,6 +75,16 @@ public class KehuServiceImpl implements KehuService{
     @Override
     public List<Kehu> findAlldel() {
         return kehuDao.findByIsdel(true);
+    }
+
+    @Override
+    @Transactional(rollbackFor=Exception.class)
+    public void add(Kehu kehu, Kehuzoufang kehuzoufang) throws Exception {
+        kehuzoufang.setBumen(kehu.getZhandian());
+        kehuzoufang.setChuangjianren(kehu.getChuangjianren());
+        kehuzoufang.setShijian(new Date());
+        add(kehu);
+        kehuzoufangService.add(kehuzoufang);
     }
 
 }

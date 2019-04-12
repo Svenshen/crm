@@ -14,6 +14,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotEmpty;
 import lombok.Data;
 
 /**
@@ -35,6 +36,7 @@ public class Kehuzoufang implements Serializable {
     @Column
     String zoufangjieguo;
     @Column(columnDefinition = "text")
+    @NotEmpty(message="走访情况不能为空")        
     String zoufangrizhi;
     @Column
     String bumen;

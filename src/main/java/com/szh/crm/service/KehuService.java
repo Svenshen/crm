@@ -8,6 +8,7 @@
 package com.szh.crm.service;
 
 import com.szh.crm.domain.Kehu;
+import com.szh.crm.domain.Kehuzoufang;
 import java.util.List;
 
 /**
@@ -32,6 +33,8 @@ public interface KehuService {
     
     
     public void add(Kehu kehu) throws Exception;
+    
+    public void add(Kehu kehu,Kehuzoufang kehuzoufang) throws Exception;
     
     public void update(Kehu kehu) throws Exception;
 }

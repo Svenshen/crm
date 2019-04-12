@@ -34,4 +34,5 @@ public interface KehuzoufangrenwuDao extends JpaRepository<Kehuzoufangrenwu,Long
     public List<Kehuzoufangrenwu> findByIsdelOrderByShenqingshijianDesc(boolean isdel);
     
     public List<Kehuzoufangrenwu> findByZhuangtaiAndIsdel(String zhuangtai,boolean isdel);
+    
 }

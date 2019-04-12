@@ -8,6 +8,7 @@
 package com.szh.crm.controller;
 
 import com.szh.crm.domain.Kehu;
+import com.szh.crm.domain.Kehuzoufang;
 import com.szh.crm.domain.User;
 import com.szh.crm.service.BumenService;
 import com.szh.crm.service.KehuService;
@@ -40,6 +41,8 @@ public class KehuController extends CommonController{
     final String querylisthtml  = "kehu-querylist";
     final String updatehtml = "kehu-update";
     
+    final String[] listzoufangjieguo =  {"开发中","已合作","已放弃"};
+    
     final String[] listshifouyoujidixuqiu =  {"是","否"};
     final String[] listguoneiyewuliang =  {"无","0-20件","20-100件","100-1000件","1000-10000件","万件以上"};
     final String[] listguoneiyewushouru =  {"无","0-400元","400-4000元","4000-10000元","万元以上"};
@@ -66,12 +69,13 @@ public class KehuController extends CommonController{
         modelAndView.addObject("listguojiyewuliang",listguojiyewuliang);
         modelAndView.addObject("listguojiyewushouru",listguojiyewushouru);
         modelAndView.addObject("listmuqianshiyongkuaidigongsi",listmuqianshiyongkuaidigongsi);
+        modelAndView.addObject("listzoufangjieguo",listzoufangjieguo);
         modelAndView.setViewName(addhtml);
         return modelAndView;
     }
     
     @PostMapping(value = "/add")
-    public ModelAndView add(ModelAndView modelAndView,Kehu kehu){
+    public ModelAndView add(ModelAndView modelAndView,Kehu kehu,Kehuzoufang kehuzoufang){
         Subject subject = SecurityUtils.getSubject();
         User user = (User)subject.getPrincipal();
         Common(modelAndView);
@@ -82,11 +86,12 @@ public class KehuController extends CommonController{
         modelAndView.addObject("listguojiyewuliang",listguojiyewuliang);
         modelAndView.addObject("listguojiyewushouru",listguojiyewushouru);
         modelAndView.addObject("listmuqianshiyongkuaidigongsi",listmuqianshiyongkuaidigongsi);
+        modelAndView.addObject("listzoufangjieguo",listzoufangjieguo);
         kehu.setZhandian(user.getBumen());
         kehu.setChuangjianren(user.getUsername());
         kehu.setDengjishijian(new Date());
         try{
-            kehuService.add(kehu);
+            kehuService.add(kehu,kehuzoufang);
             modelAndView.addObject("msg","增加成功");
         }catch(Exception e){
             modelAndView.addObject("msg",e.getMessage());

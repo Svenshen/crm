@@ -13,6 +13,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Temporal;
+import javax.validation.constraints.NotEmpty;
 import lombok.Data;
 
 /**
@@ -33,10 +34,13 @@ public class Kehu implements Serializable{
     @Column
     String zhandian;
     @Column
+    @NotEmpty(message="地址不能为空")
     String dizhi;
     @Column
+    @NotEmpty(message="联系人不能为空")
     String lianxiren;
     @Column
+    @NotEmpty(message="联系电话不能为空")
     String lianxidianhua;
     @Column
     String shifouyoujidixuqiu;
