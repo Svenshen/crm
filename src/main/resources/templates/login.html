@@ -3,7 +3,8 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" lang="zh-CN">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 <!--    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
      上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ 
@@ -12,9 +13,89 @@
     <link th:href="@{bootstrap/css/bootstrap.css}"  rel="stylesheet">-->
 <!--    <link th:href="@{/webjars/bootstrap/4.1.3/css/bootstrap.min.css}"  rel="stylesheet">-->
     <link th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"  rel="stylesheet">
-
+   
+    <!-- Font Awesome -->
+    <link rel="stylesheet" th:href="@{/webjars/font-awesome/5.8.1/css/all.min.css}">
+    <!-- Ionicons -->
+    <link rel="stylesheet" th:href="@{/webjars/ionicons/4.5.5/dist/css/ionicons.min.css}">
+    <!-- Theme style -->
+    <link rel="stylesheet" th:href="@{/webjars/AdminLTE/2.4.10/dist/css/AdminLTE.min.css}">
+    <!-- iCheck -->
+    <link rel="stylesheet" th:href="@{/webjars/AdminLTE/2.4.10/plugins/iCheck/square/blue.css}">    
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+      <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+      <!--[if lt IE 9]>
+      <script src="../../dist/js/html5shiv.min.js"></script>
+      <script src="../../dist/js/respond.min.js"></script>
+      <![endif]-->
+    </head>
+        
     <title>客户营销管理系统</title>
 </head>
+
+<body class="hold-transition">
+<div class="login-box">
+  <div class="login-logo">
+    <img src="resources/chinapostlogo.jpg" class="img-responsive center-block"/>
+  </div>
+  <div class="login-logo">
+    客户营销管理系统
+  </div>  
+    
+  <!-- /.login-logo -->
+  <div class="login-box-body">
+    <p class="login-box-msg" th:text="${msg}"></p>
+
+    <form th:action="@{/login}" method="post">
+      <div class="form-group has-feedback">
+        <input type="email" class="form-control" placeholder="用户名">
+        <span class="glyphicon glyphicon-user form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback">
+        <input type="password" class="form-control" placeholder="密码">
+        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+      </div>
+      <div class="row">
+       <div class="col-xs-8">
+<!--          <div class="checkbox icheck">
+            <label>
+              <input type="checkbox"> Remember Me
+            </label>
+          </div>-->
+        </div>
+        <!-- /.col -->
+        <div class="col-xs-4">
+          <button type="submit" class="btn btn-primary btn-block btn-flat">登 录</button>
+        </div>
+        <!-- /.col -->
+      </div>
+    </form>
+
+   
+
+  </div>
+  <!-- /.login-box-body -->
+</div>
+<!-- /.login-box -->
+
+<!-- jQuery 2.2.3 -->
+<script th:src="@{/webjars/jquery/1.9.1/jquery.min.js}"></script>
+<script th:src="@{/webjars/popper.js/1.14.3/umd/popper.min.js}"></script>
+<!-- Bootstrap 3.3.6 -->
+<script th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}" ></script>
+<!-- iCheck -->
+<script th:src="@{/webjars/AdminLTE/2.4.10/plugins/iCheck/icheck.min.js}"></script>
+<script>
+  $(function () {
+    $('input').iCheck({
+      checkboxClass: 'icheckbox_square-blue',
+      radioClass: 'iradio_square-blue',
+      increaseArea: '20%' // optional
+    });
+  });
+</script>
+</body>
+<!--
 <body>
     <div class="container" >
         <form class="form-signin" th:action="@{/login}" method="post" >
@@ -31,10 +112,9 @@
                 <div class="form-group row col-xs-12 col-md-5">
                         <span  style="font-size: 12px;color: red" th:text="${msg}" aria-describedby="basic-addon0"></span>
 
-                    <!--/*@thymesVar id="error" type=""*/-->
-                    <!--<span id="basic-addon0">&nbsp;</span>-->
+                 
 
-                <!--<br />-->
+              
                 </div>
             </div>
             <div class="row">
@@ -58,11 +138,11 @@
         </form>
     </div>
     <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
-    <!--<script th:src="@{/bootstrap/jquery-1.12.4.min.js}"></script>-->
+    <!--<script th:src="@{/bootstrap/jquery-1.12.4.min.js}"></script>
     <script th:src="@{/webjars/jquery/1.9.1/jquery.min.js}"></script>
     <script th:src="@{/webjars/popper.js/1.14.3/umd/popper.min.js}"></script>
-    <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
-    <!--<script th:src="@{/bootstrap/js/bootstrap.min.js}" ></script>-->
+    <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 
+    <!--<script th:src="@{/bootstrap/js/bootstrap.min.js}" ></script>
     <script th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}" ></script>
-</body>
+</body>-->
 </html>

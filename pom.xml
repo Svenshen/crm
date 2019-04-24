@@ -120,6 +120,23 @@
                 <artifactId>druid-spring-boot-starter</artifactId>
                 <version>1.1.10</version>
             </dependency>
+            <!-- https://mvnrepository.com/artifact/org.webjars.bower/adminlte -->
+            <dependency>
+                <groupId>org.webjars</groupId>
+                <artifactId>AdminLTE</artifactId>
+                <version>2.4.10</version>
+            </dependency>
+            <dependency>
+                <groupId>org.webjars</groupId>
+                <artifactId>font-awesome</artifactId>
+                <version>5.8.1</version>
+            </dependency>
+            <dependency>
+                <groupId>org.webjars.npm</groupId>
+                <artifactId>ionicons</artifactId>
+                <version>4.5.5</version>
+            </dependency>
+
 <!--            <dependency>
                 <groupId>org.flowable</groupId>
                 <artifactId>flowable-spring-boot-starter</artifactId>
