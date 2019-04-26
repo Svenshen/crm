@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" lang="zh-CN">
+<head th:fragment="commonHeader(title)">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title>客户营销管理系统</title>
+    
+     <!-- Bootstrap -->
+    <!--<link th:href="@{/bootstrap/css/bootstrap.css}"  rel="stylesheet">-->
+    <link th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"  rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" th:href="@{/webjars/font-awesome/5.8.1/css/all.min.css}">
+    <!-- Ionicons -->
+    <link rel="stylesheet" th:href="@{/webjars/ionicons/4.5.5/dist/css/ionicons.min.css}">
+    <!-- Theme style -->
+    <link rel="stylesheet" th:href="@{/webjars/AdminLTE/2.4.10/dist/css/AdminLTE.min.css}">
+<!--     iCheck 
+    <link rel="stylesheet" th:href="@{/webjars/AdminLTE/2.4.10/plugins/iCheck/square/blue.css}">  -->
+    <link rel="stylesheet" th:href="@{/webjars/AdminLTE/2.4.10/dist/css/skins/_all-skins.min.css}">
+
+    <!-- jvectormap -->
+    <link rel="stylesheet" th:href="@{/webjars/AdminLTE/2.4.10/plugins/jvectormap/jquery-jvectormap-1.2.2.css}">
+        
+    <link th:href="@{/webjars/Eonasdan-bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css}"  rel="stylesheet">   
+    <link rel="stylesheet" th:href="@{/resources/bootstrap-table/bootstrap-table.min.css}">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+      <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+      <!--[if lt IE 9]>
+      <script th:src="@{/webjars/html5shiv/3.7.2/dist/html5shiv.min.js}"></script>
+      <script th:src="@{/webjars/respond/1.4.2/respond.min.js}"></script>
+      <![endif]-->
+    <style type="text/css">
+      body {
+        margin: 0;
+        padding-top:  60px;
+      }
+      
+    </style>
+    
+</head>
+<body>
+    <div th:fragment="commonNav">
+        <div class="modal fade" id="tishiModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+				<h4 class="modal-title" id="myModalLabel">
+					提示
+				</h4>
+			</div>
+                    <div class="modal-body" id="tishiModalText">
+				在这里添加一些文本
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+				</button>
+				
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+    </div>
+        <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container-fluid" >
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse"
+                                    data-target="#example-navbar-collapse">
+                            <span class="sr-only">切换导航</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">客户营销管理系统</a>
+                </div>
+                <div class="collapse navbar-collapse" id="example-navbar-collapse" th:switch="${user.quanxian}">
+                    <ul class="nav navbar-nav" th:case="10" >
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                            客户管理 <b class="caret"></b>
+                                    </a>
+                                        <ul class="dropdown-menu">
+                                                <li><a th:href="@{/kehu/add}">新建客户</a></li>
+                                                <li><a th:href="@{/kehu/querylist}">客户查询</a></li>
+                                        </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                            走访管理<b class="caret"></b><span class="badge" th:text="${renwunum}">0</span> 
+                                    </a>
+                                        <ul class="dropdown-menu">
+                                                <li><a th:href="@{/kehuzoufang/querylist}">走访记录查询</a></li>
+                                                <li><a th:href="@{/kehuzoufangrenwu/querylist}">走访申请查询</a></li>
+                                                <li><a th:href="@{/kehuzoufangrenwu/renwu}">走访任务查询<span class="badge pull-right" th:text="${renwunum}">0</span></a></li>
+                                        </ul>
+                        </li>
+
+                    </ul>
+                    <ul class="nav navbar-nav" th:case="20" >
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                            客户管理 <b class="caret"></b>
+                                    </a>
+                                        <ul class="dropdown-menu">
+                                                <li><a th:href="@{/kehu/add}">新建客户</a></li>
+                                                <li><a th:href="@{/kehu/querylist}">客户查询</a></li>
+                                        </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                            走访管理 <b class="caret"></b><span class="badge" th:text="${renwunum}">0</span>
+                                    </a>
+                                        <ul class="dropdown-menu">
+                                                <li><a th:href="@{/kehuzoufang/querylist}">走访记录查询</a></li>
+                                                <li><a th:href="@{/kehuzoufangrenwu/querylist}">走访申请查询</a></li>
+                                                <li><a th:href="@{/kehuzoufangrenwu/renwu}">走访任务查询<span class="badge pull-right" th:text="${renwunum}">0</span></a></li>
+                                        </ul>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav" th:case="30" >
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                            客户管理 <b class="caret"></b>
+                                    </a>
+                                        <ul class="dropdown-menu">
+                                                <li><a th:href="@{/kehu/add}">新建客户</a></li>
+                                                <li><a th:href="@{/kehu/querylist}">客户查询</a></li>
+                                        </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                            走访管理 <b class="caret"></b><span class="badge " th:text="${renwunum}">0</span>
+                                    </a>
+                                        <ul class="dropdown-menu">
+                                                <li><a th:href="@{/kehuzoufang/querylist}">走访记录查询</a></li>
+                                                <li><a th:href="@{/kehuzoufangrenwu/querylist}">走访申请查询</a></li>
+                                                <li><a th:href="@{/kehuzoufangrenwu/renwu}">走访任务查询 <span class="badge pull-right" th:text="${renwunum}">0</span></a></li>
+                                        </ul>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav" th:case="40" >
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                            客户管理 <b class="caret"></b>
+                                    </a>
+                                        <ul class="dropdown-menu">
+                                                <li><a th:href="@{/kehu/add}">新增客户</a></li>
+                                                <li><a th:href="@{/kehu/querylist}">客户查询</a></li>
+                                        </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                            走访管理 <b class="caret"></b><span class="badge" th:text="${renwunum}">0</span>
+                                    </a>
+                                        <ul class="dropdown-menu">
+                                                <li><a th:href="@{/kehuzoufang/querylist}">走访记录查询</a></li>
+                                                <li><a th:href="@{/kehuzoufangrenwu/shenqingshenpilist}">走访申请审批</a></li>
+                                                <li><a th:href="@{/kehuzoufangrenwu/querylist}">走访申请查询</a></li>
+                                                <li><a th:href="@{/kehuzoufangrenwu/renwu}">走访任务查询<span class="badge pull-right" th:text="${renwunum}">0</span></a></li>
+                                        </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                            营销员管理 <b class="caret"></b>
+                                    </a>
+                                        <ul class="dropdown-menu">
+                                                <li><a th:href="@{/user/add}">新增营销员</a></li>
+                                                <li><a th:href="@{/user/query}">营销员查询</a></li>
+<!--                                                <li><a th:href="@{/user/huifu}">营销员恢复</a></li>-->
+                                        </ul>
+                        </li>
+                        
+                        
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a class="glyphicon glyphicon-user disabled" th:text="${user.name}" href="####"></a></li>
+                        <li><a th:href="@{/user/changepassword}">密码修改</a></li>
+                        <li><a th:href="@{/logout}">登出</a></li>
+                    </ul>
+                 </div>
+            </div>
+        </nav>
+
+    </div>
+
+<footer th:fragment="commonFooter">
+    <!-- jQuery 2.2.3 -->
+    <script th:src="@{/webjars/jquery/1.9.1/jquery.min.js}"></script>
+    <script th:src="@{/webjars/popper.js/1.14.3/umd/popper.min.js}"></script>
+    <!-- Bootstrap 3.3.6 -->
+    <script th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}" ></script>
+    
+    <script th:src="@{/webjars/fastclick/1.0.6/lib/fastclick.js}"></script>
+    
+    <!-- AdminLTE App -->
+    <script th:src="@{/webjars/AdminLTE/2.4.10/dist/js/adminlte.min.js}"></script>
+    <!-- Sparkline -->
+    <script th:src="@{/webjars/jquery-sparkline/2.4.0/jquery.sparkline.min.js}"></script>
+    <!-- jvectormap  -->
+    <script th:src="@{/webjars/AdminLTE/2.4.10/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js}"></script>
+    <script th:src="@{/webjars/AdminLTE/2.4.10/plugins/jvectormap/jquery-jvectormap-world-mill-en.js}"></script>
+    <!-- SlimScroll -->
+    <script th:src="@{/webjars/jQuery-slimScroll/1.3.8/jquery.slimscroll.min.js}"></script>
+    <!-- ChartJS -->
+    <script th:src="@{/webjars/chartjs/2.6.0/dist/Chart.js}"></script>
+    
+    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+    
+    <script th:src="@{/webjars/AdminLTE/2.4.10/dist/js/pages/dashboard2.js}"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script th:src="@{/webjars/AdminLTE/2.4.10/dist/js/demo.js}"></script>
+<!--     iCheck 
+    <script th:src="@{/webjars/AdminLTE/2.4.10/plugins/iCheck/icheck.min.js}"></script>-->
+<!--    <script>
+      $(function () {
+        $('input').iCheck({
+          checkboxClass: 'icheckbox_square-blue',
+          radioClass: 'iradio_square-blue',
+          increaseArea: '20%' // optional
+        });
+      });
+    </script>-->
+    <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+    <!--<script th:src="@{/bootstrap/jquery-1.12.4.min.js}"></script>-->
+<!--    <script th:src="@{/webjars/jquery/1.9.1/jquery.min.js}"></script>-->
+    <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
+    <!--<script th:src="@{/bootstrap/js/bootstrap.min.js}" ></script>-->
+<!--    <script th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}" ></script>-->
+    <script th:src="@{/webjars/momentjs/2.22.2/min/moment-with-locales.min.js}" ></script>
+    <script th:src="@{/webjars/Eonasdan-bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js}" ></script>
+    
+    <script th:src="@{/resources/bootstrap-table/bootstrap-table.min.js}"></script>
+
+<!-- Latest compiled and minified Locales -->
+    <script th:src="@{/resources/bootstrap-table/locale/bootstrap-table-zh-CN.min.js}"></script>
+    
+    <script th:src="@{/resources/bootstrap-table/extensions/export/bootstrap-table-export.js}"></script>
+    
+    <!-- bootstrap-table-export数据导出---后面两个是Excel2007所需要的js -->
+    <script th:src="@{/resources/bootstrap-table/tableExport.min.js}"></script>
+    <script th:src="@{/resources/bootstrap-table/xlsx.core.min.js}"></script>
+    <script th:src="@{/resources/bootstrap-table/FileSaver.min.js}"></script>
+    
+    <script>
+         $(function () {   $(".navbar-default").find("li").each(
+                     function () {     
+                         var a = $(this).find("a:first")[0];    
+                         
+                 if ($(a).attr("href") === location.pathname || location.pathname.search($(a).attr("href")) >= 0 ) {  
+                     $(this).addClass("active");    
+                 } else {    
+                     $(this).removeClass("active");  
+                 }   }); 
+         }) 
+         
+
+        </script>
+    <script>
+            $(".form_datetime").datetimepicker({locale:'zh-cn',format: 'YYYY-MM-DD HH:mm:ss'});
+            
+    </script>
+</footer>
+</body>
+</html>

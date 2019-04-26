@@ -25,19 +25,19 @@
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
       <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
       <!--[if lt IE 9]>
-      <script src="../../dist/js/html5shiv.min.js"></script>
-      <script src="../../dist/js/respond.min.js"></script>
+      <script th:src="@{/webjars/html5shiv/3.7.2/dist/html5shiv.min.js}"></script>
+      <script th:src="@{/webjars/respond/1.4.2/respond.min.js}"></script>
       <![endif]-->
     </head>
         
     <title>客户营销管理系统</title>
 </head>
 
-<body class="hold-transition">
+<body class="hold-transition login-page">
 <div class="login-box">
-  <div class="login-logo">
+<!--  <div class="login-logo">
     <img src="resources/chinapostlogo.jpg" class="img-responsive center-block"/>
-  </div>
+  </div>-->
   <div class="login-logo">
     客户营销管理系统
   </div>  
@@ -57,11 +57,11 @@
       </div>
       <div class="row">
        <div class="col-xs-8">
-<!--          <div class="checkbox icheck">
+           <div class="checkbox icheck">
             <label>
-              <input type="checkbox"> Remember Me
+              <input type="checkbox"> 记 住 我
             </label>
-          </div>-->
+          </div>
         </div>
         <!-- /.col -->
         <div class="col-xs-4">
